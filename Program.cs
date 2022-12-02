@@ -1,20 +1,33 @@
-﻿
-using static System.Console;
+﻿using static System.Console;
 Clear();
 
-WriteLine($"\"\"{GetStringNumbersRec(Input("M"), Input("N"))}\"\"");
 
+int m = InputNumbers("Enter m: ");
+int n = InputNumbers("Enter n: ");
+int temp = m;
 
-int Input(string text)
+if (m > n) 
 {
-    WriteLine($"Enter the number {text}: ");
-    int number = int.Parse(ReadLine()!);
-    return number;
+  m = n; 
+  n = temp;
 }
 
-string GetStringNumbersRec(int a, int b)
+PrintSumm(m, n, temp=0);
+
+void PrintSumm(int m, int n, int summ)
 {
-    if (a == b) return $"{b}";
-    if (a > b) return $"{a}," + GetStringNumbersRec(a - 1, b);
-    return $"{b}," + GetStringNumbersRec(b - 1, a);
+  summ = summ + n;
+  if (n <= m)
+  {
+    Write($"Sum of elements is {summ} ");
+    return;
+  }
+  PrintSumm(m, n - 1, summ);
+}
+
+int InputNumbers(string input) 
+{
+  Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
 }
